@@ -25,13 +25,13 @@ info:
     url: https://opensource.org/licenses/MIT
   version: 0.2.4
 servers:
-  - url: http://k3s-odysseia.greek/alexandros/v1
-  - url: https://k3s-odysseia.greek/alexandros/v1
+- url: http://k3s-odysseia.greek/alexandros/v1
+- url: https://k3s-odysseia.greek/alexandros/v1
 paths:
   /health:
     get:
       tags:
-        - status
+      - status
       description: Checks if api is healthy
       operationId: health
       responses:
@@ -50,7 +50,7 @@ paths:
   /ping:
     get:
       tags:
-        - status
+      - status
       summary: Checks the reachability of the API.
       description: This endpoint returns a "pong" response to indicate that the API
         is reachable.
@@ -65,36 +65,35 @@ paths:
   /search:
     get:
       tags:
-        - search
+      - search
       description: Searches the dictionary for a word in Greek (English wip)
       operationId: search
       parameters:
-        - name: word
-          in: query
-          description: word or part of word being queried
-          required: true
-          schema:
-            type: string
-            format: word
-        - name: mode
-          in: query
-          description: "Determines a number of query modes; fuzzy, exact or phrase"
-          schema:
-            type: string
-            format: mode
-        - name: lang
-          in: query
-          description: "language to use (greek, english, dutch)"
-          schema:
-            type: string
-            format: lang
-        - name: searchWord
-          in: query
-          description: search the word if found in texts. This slows down operations
-            so not recommended in fuzzy or partial modes
-          schema:
-            type: boolean
-            format: searchWord
+      - name: word
+        in: query
+        description: word or part of word being queried
+        required: true
+        schema:
+          type: string
+          format: word
+      - name: mode
+        in: query
+        description: "Determines a number of query modes; fuzzy, exact or phrase"
+        schema:
+          type: string
+          format: mode
+      - name: lang
+        in: query
+        description: "language to use (greek, english, dutch)"
+        schema:
+          type: string
+          format: lang
+      - name: searchWord
+        in: query
+        description: search the word if found in texts. This slows down operations
+          so not recommended in fuzzy or partial modes
+        schema:
+          type: boolean
       responses:
         "200":
           description: ExtendedResponse
@@ -157,7 +156,7 @@ components:
       x-go-package: github.com/odysseia-greek/agora/plato/models
     ElasticSearchError:
       required:
-        - uniqueCode
+      - uniqueCode
       type: object
       properties:
         errorModel:
@@ -169,7 +168,7 @@ components:
       x-go-package: github.com/odysseia-greek/agora/plato/models
     ErrorModel:
       required:
-        - uniqueCode
+      - uniqueCode
       type: object
       properties:
         uniqueCode:
@@ -218,7 +217,7 @@ components:
       x-go-package: github.com/odysseia-greek/agora/plato/models
     MethodError:
       required:
-        - uniqueCode
+      - uniqueCode
       type: object
       properties:
         errorModel:
@@ -245,15 +244,19 @@ components:
               greek: "λόγος –ου, ὁ"
               english: "word"
             foundInText:
-              rhemai:
-                - author: "Matthew New Testament"
-                  greek: "ἐκ γὰρ τῶν λόγων σου δικαιωθήσῃ, καὶ ἐκ τῶν λόγων σου καταδικασθήσῃ."
-                  translations:
-                    - "For by your words you will be justified, and by your words you will be condemned."
-                  book: 2
-                  chapter: 12
-                  section: 37
-                  perseusTextLink: "https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0031.tlg001.perseus-grc2:12.37/"
+              - conjugations:
+                  - word: "λόγων"
+                    rule: "noun - plural - masc - gen"
+                rootword: "λογος"
+                texts:
+                  author: "Matthew"
+                  book: "New Testament, Gospel of Matthew"
+                  reference: "12"
+                  referenceLink: "/texts?author=Matthew&book=New Testament, Gospel of Matthew&reference=12"
+                  text:
+                    greek: "ἐκ γὰρ τῶν λόγων σου δικαιωθήσῃ"
+                    translations:
+                      - "For by your words you will be justified, and by your words you will be condemned."
 
     Hit:
       type: object
@@ -280,41 +283,64 @@ components:
     FoundInText:
       type: object
       properties:
-        rhemai:
+        rootword:
+          type: string
+        conjugations:
           type: array
           items:
-            $ref: '#/components/schemas/TextInstance'
+            $ref: '#/components/schemas/ConjugationsResult'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Texts'
       example:
-        rhemai: []
-
-    TextInstance:
+        conjugations:
+            - word: "λόγων"
+              rule: "noun - plural - masc - gen"
+        rootword: "λογος"
+        texts: {}
+    ConjugationsResult:
+      type: object
+      properties:
+        word:
+          type: string
+          example: λόγων
+        rule:
+          type: string
+          example: noun - plural - masc - gen
+    Texts:
       type: object
       properties:
         author:
           type: string
+        book:
+          type: string
+        reference:
+          type: string
+        referenceLink:
+          type: string
+        text:
+          $ref: '#/components/schemas/TextInstance'
+      example:
+        author: "Matthew"
+        book: "New Testament, Gospel of Matthew"
+        reference: "12"
+        referenceLink: "/texts?author=Matthew&book=New Testament, Gospel of Matthew&reference=12"
+        text: {}
+
+    TextInstance:
+      type: object
+      properties:
         greek:
           type: string
         translations:
           type: array
           items:
             type: string
-        book:
-          type: integer
-        chapter:
-          type: integer
-        section:
-          type: integer
-        perseusTextLink:
-          type: string
       example:
-        author: "Plato"
         greek: "ἐκ γὰρ τῶν λόγων σου δικαιωθήσῃ"
         translations:
-          - "For by your words you will be justified"
-        book: 1
-        chapter: 1
-        section: 1
-        perseusTextLink: "https://example.com"
+          - "For by your words you will be justified, and by your words you will be condemned."
 
     MethodMessages:
       type: object
@@ -331,7 +357,7 @@ components:
       x-go-package: github.com/odysseia-greek/agora/plato/models
     NotFoundError:
       required:
-        - uniqueCode
+      - uniqueCode
       type: object
       properties:
         errorModel:
@@ -355,7 +381,7 @@ components:
       x-go-package: github.com/odysseia-greek/agora/plato/models
     ResultModel:
       required:
-        - result
+      - result
       type: object
       properties:
         result:
@@ -374,13 +400,13 @@ components:
       x-go-package: github.com/odysseia-greek/agora/plato/models
     RhemaSource:
       required:
-        - author
-        - book
-        - chapter
-        - greek
-        - perseusTextLink
-        - section
-        - translations
+      - author
+      - book
+      - chapter
+      - greek
+      - perseusTextLink
+      - section
+      - translations
       type: object
       properties:
         author:
@@ -413,15 +439,15 @@ components:
         translations:
           type: array
           example:
-            - first translation
-            - second translation
+          - first translation
+          - second translation
           items:
             type: string
           x-go-name: Translations
       x-go-package: github.com/odysseia-greek/agora/plato/models
     ValidationError:
       required:
-        - uniqueCode
+      - uniqueCode
       type: object
       properties:
         errorModel:

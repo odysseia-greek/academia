@@ -36,15 +36,16 @@
                   <a href="#group-Operations-Queries">Queries</a>
                 </h5>
                 <ul class="nav-group-section-items">
+                  <li><a href="#query-analyze">analyze</a></li>
                   <li><a href="#query-answer">answer</a></li>
-                  <li><a href="#query-authors">authors</a></li>
+                  <li><a href="#query-check">check</a></li>
+                  <li><a href="#query-create">create</a></li>
                   <li><a href="#query-dictionary">dictionary</a></li>
                   <li><a href="#query-grammar">grammar</a></li>
                   <li><a href="#query-options">options</a></li>
                   <li><a href="#query-quiz">quiz</a></li>
-                  <li><a href="#query-sentence">sentence</a></li>
                   <li><a href="#query-status">status</a></li>
-                  <li><a href="#query-text">text</a></li>
+                  <li><a href="#query-textOptions">textOptions</a></li>
                 </ul>
               </li>
               <li><a href="#"></a></li>
@@ -56,11 +57,17 @@
             <ul class="nav-group-items">
               <li><a href="#definition-Aggregate">Aggregate</a></li>
               <li><a href="#definition-AggregateResult">AggregateResult</a></li>
+              <li><a href="#definition-AggregationResult">AggregationResult</a></li>
+              <li><a href="#definition-AnalyzeResult">AnalyzeResult</a></li>
+              <li><a href="#definition-AnalyzeTextResponse">AnalyzeTextResponse</a></li>
+              <li><a href="#definition-AnswerSection">AnswerSection</a></li>
               <li><a href="#definition-AnswerUnion">AnswerUnion</a></li>
-              <li><a href="#definition-Authors">Authors</a></li>
-              <li><a href="#definition-Book">Book</a></li>
               <li><a href="#definition-Boolean">Boolean</a></li>
+              <li><a href="#definition-CheckTextRequestInput">CheckTextRequestInput</a></li>
+              <li><a href="#definition-CheckTextResponse">CheckTextResponse</a></li>
               <li><a href="#definition-ComprehensiveResponse">ComprehensiveResponse</a></li>
+              <li><a href="#definition-ConjugationResponse">ConjugationResponse</a></li>
+              <li><a href="#definition-CreateTextInput">CreateTextInput</a></li>
               <li><a href="#definition-Database">Database</a></li>
               <li><a href="#definition-Dialogue">Dialogue</a></li>
               <li><a href="#definition-DialogueAnswer">DialogueAnswer</a></li>
@@ -68,8 +75,11 @@
               <li><a href="#definition-DialogueCorrection">DialogueCorrection</a></li>
               <li><a href="#definition-DialogueInput">DialogueInput</a></li>
               <li><a href="#definition-DialogueQuiz">DialogueQuiz</a></li>
+              <li><a href="#definition-ESAuthor">ESAuthor</a></li>
+              <li><a href="#definition-ESBook">ESBook</a></li>
+              <li><a href="#definition-ExtendedDictionary">ExtendedDictionary</a></li>
+              <li><a href="#definition-ExtendedDictionaryEntry">ExtendedDictionaryEntry</a></li>
               <li><a href="#definition-Float">Float</a></li>
-              <li><a href="#definition-FoundInText">FoundInText</a></li>
               <li><a href="#definition-Health">Health</a></li>
               <li><a href="#definition-Hit">Hit</a></li>
               <li><a href="#definition-Int">Int</a></li>
@@ -78,17 +88,16 @@
               <li><a href="#definition-QuizMetadata">QuizMetadata</a></li>
               <li><a href="#definition-QuizResponse">QuizResponse</a></li>
               <li><a href="#definition-QuizResponseUnion">QuizResponseUnion</a></li>
+              <li><a href="#definition-Reference">Reference</a></li>
               <li><a href="#definition-Result">Result</a></li>
               <li><a href="#definition-Rhema">Rhema</a></li>
-              <li><a href="#definition-Sentence">Sentence</a></li>
+              <li><a href="#definition-Section">Section</a></li>
               <li><a href="#definition-Speaker">Speaker</a></li>
               <li><a href="#definition-Status">Status</a></li>
               <li><a href="#definition-String">String</a></li>
               <li><a href="#definition-Text">Text</a></li>
-              <li><a href="#definition-matches">matches</a></li>
-              <li><a href="#definition-mistakes">mistakes</a></li>
-              <li><a href="#definition-nonMatches">nonMatches</a></li>
-              <li><a href="#definition-word">word</a></li>
+              <li><a href="#definition-TranslationsInput">TranslationsInput</a></li>
+              <li><a href="#definition-Typo">Typo</a></li>
             </ul>
           </div>
         </nav>
@@ -125,8 +134,8 @@
                 </div>
                 <div class="example-section welcome-api-endpoints-section example-section-is-code">
                   <h5>API Endpoints</h5>
-                  <pre><code># k3s:
-http://k3s-odysseia.greek/graphql
+                  <pre><code># k3d:
+http://k3d-odysseia.greek/graphql
 # Production:
 https://odysseia-greek.com/graphql
 </code></pre>
@@ -155,7 +164,109 @@ https://odysseia-greek.com/graphql
             </div>
           </div>
           <h1 id="group-Operations-Queries" class="group-heading" data-traverse-target="group-Operations-Queries">Queries</h1>
+          <section id="query-analyze" class="operation operation-query" data-traverse-target="query-analyze">
+            <h2 class="operation-heading ">
+              <code>analyze</code>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="operation-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>analyze text based on a rootword</p>
+                </div>
+              </div>
+            </div>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="operation-response doc-copy-section">
+                  <h5>Response</h5>
+                  <p> Returns an <a href="#definition-AnalyzeTextResponse"><code>AnalyzeTextResponse</code></a>
+                  </p>
+                </div>
+                <div class="operation-arguments doc-copy-section">
+                  <h5>Arguments</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>rootword</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <h4 class="example-heading">Example</h4>
+                <div class="example-section example-section-is-code operation-query-example">
+                  <h5>Query</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> Analyze<span class="hljs-tag">(<span class="hljs-code">$rootword</span>:<span class="hljs-type"> String)</span> {
+  analyze(rootword: <span class="hljs-code">$rootword</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">conjugations <span class="hljs-tag">{
+      <span class="hljs-symbol">rule</span>
+      <span class="hljs-symbol">word</span>
+    }</span></span>
+    <span class="hljs-symbol">results <span class="hljs-tag">{
+      <span class="hljs-symbol">author</span>
+      <span class="hljs-symbol">book</span>
+      <span class="hljs-symbol">reference</span>
+      <span class="hljs-symbol">referenceLink</span>
+      <span class="hljs-symbol">text <span class="hljs-tag">{
+        <span class="hljs-symbol">greek</span>
+        <span class="hljs-symbol">section</span>
+        <span class="hljs-symbol">translations</span>
+      }</span></span>
+    }</span></span>
+    <span class="hljs-symbol">rootword</span>
+  }</span></span>
+}
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-variables-example">
+                  <h5>Variables</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"rootword"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-response-example">
+                  <h5>Response</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"analyze"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"conjugations"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">ConjugationResponse</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"results"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">AnalyzeResult</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"rootword"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
           <section id="query-answer" class="operation operation-query" data-traverse-target="query-answer">
+            <div class="operation-group-name">
+              <a href="#group-Operations-Queries">Queries</a>
+            </div>
             <h2 class="operation-heading ">
               <code>answer</code>
             </h2>
@@ -176,20 +287,6 @@ https://odysseia-greek.com/graphql
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>answer</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>comprehensive</code></span> - <span class="property-type"><a href="#definition-Boolean"><code>Boolean</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
                       <tr>
                         <td>
                           <span class="property-name"><code>dialogue</code></span> - <span class="property-type"><a href="#definition-DialogueInput"><code>[DialogueInput]</code></a></span>
@@ -225,6 +322,20 @@ https://odysseia-greek.com/graphql
                         <td>
                         </td>
                       </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>answer</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>comprehensive</code></span> - <span class="property-type"><a href="#definition-Boolean"><code>Boolean</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -236,29 +347,33 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> Answer<span class="hljs-tag">(
-  <span class="hljs-code">$answer</span>:<span class="hljs-type"> String,</span>
-  <span class="hljs-code">$comprehensive</span>:<span class="hljs-type"> Boolean,</span>
   <span class="hljs-code">$dialogue</span>: <span class="hljs-type">[DialogueInput]</span>,
   <span class="hljs-code">$theme</span>:<span class="hljs-type"> String,</span>
   <span class="hljs-code">$set</span>:<span class="hljs-type"> String,</span>
   <span class="hljs-code">$quizType</span>:<span class="hljs-type"> String,</span>
-  <span class="hljs-code">$quizWord</span>:<span class="hljs-type"> String
+  <span class="hljs-code">$quizWord</span>:<span class="hljs-type"> String,</span>
+  <span class="hljs-code">$answer</span>:<span class="hljs-type"> String,</span>
+  <span class="hljs-code">$comprehensive</span>:<span class="hljs-type"> Boolean
 </span>)</span> <span class="hljs-tag">{
   <span class="hljs-symbol">answer<span class="hljs-tag">(
-    answer: <span class="hljs-code">$answer</span>,
-    comprehensive: <span class="hljs-code">$comprehensive</span>,
     dialogue: <span class="hljs-code">$dialogue</span>,
     theme: <span class="hljs-code">$theme</span>,
     set: <span class="hljs-code">$set</span>,
     quizType: <span class="hljs-code">$quizType</span>,
-    quizWord: <span class="hljs-code">$quizWord</span>
+    quizWord: <span class="hljs-code">$quizWord</span>,
+    answer: <span class="hljs-code">$answer</span>,
+    comprehensive: <span class="hljs-code">$comprehensive</span>
   )</span> <span class="hljs-tag">{
    <span class="hljs-type"> ... on ComprehensiveResponse <span class="hljs-tag">{
       <span class="hljs-symbol">correct</span>
       <span class="hljs-symbol">foundInText <span class="hljs-tag">{
-        <span class="hljs-symbol">rhemai <span class="hljs-tag">{
-          <span class="hljs-type">...RhemaFragment</span>
+        <span class="hljs-symbol">conjugations <span class="hljs-tag">{
+          <span class="hljs-type">...ConjugationResponseFragment</span>
         }</span></span>
+        <span class="hljs-symbol">results <span class="hljs-tag">{
+          <span class="hljs-type">...AnalyzeResultFragment</span>
+        }</span></span>
+        <span class="hljs-symbol">rootword</span>
       }</span></span>
       <span class="hljs-symbol">progress <span class="hljs-tag">{
         <span class="hljs-symbol">averageAccuracy</span>
@@ -307,13 +422,13 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"answer"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"comprehensive"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"dialogue"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">DialogueInput</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"theme"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"theme"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"set"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"quizType"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"quizWord"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+  <span class="hljs-attr">"quizType"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"quizWord"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"answer"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"comprehensive"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -331,18 +446,18 @@ https://odysseia-greek.com/graphql
               </div>
             </div>
           </section>
-          <section id="query-authors" class="operation operation-query" data-traverse-target="query-authors">
+          <section id="query-check" class="operation operation-query" data-traverse-target="query-check">
             <div class="operation-group-name">
               <a href="#group-Operations-Queries">Queries</a>
             </div>
             <h2 class="operation-heading ">
-              <code>authors</code>
+              <code>check</code>
             </h2>
             <div class="doc-row">
               <div class="doc-copy">
                 <div class="operation-description doc-copy-section">
                   <h5>Description</h5>
-                  <p>Get the author and books tree from Herodotos</p>
+                  <p>Check the text given</p>
                 </div>
               </div>
             </div>
@@ -350,8 +465,28 @@ https://odysseia-greek.com/graphql
               <div class="doc-copy">
                 <div class="operation-response doc-copy-section">
                   <h5>Response</h5>
-                  <p> Returns <a href="#definition-Authors"><code>[Authors]</code></a>
+                  <p> Returns a <a href="#definition-CheckTextResponse"><code>CheckTextResponse</code></a>
                   </p>
+                </div>
+                <div class="operation-arguments doc-copy-section">
+                  <h5>Arguments</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>input</code></span> - <span class="property-type"><a href="#definition-CheckTextRequestInput"><code>CheckTextRequestInput</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
               <div class="doc-examples">
@@ -360,14 +495,30 @@ https://odysseia-greek.com/graphql
                   <h5>Query</h5>
                   <html>
                     <head></head>
-                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> Authors <span class="hljs-tag">{
-  <span class="hljs-symbol">authors <span class="hljs-tag">{
-    <span class="hljs-symbol">books <span class="hljs-tag">{
-      <span class="hljs-symbol">book</span>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> Check<span class="hljs-tag">(<span class="hljs-code">$input</span>:<span class="hljs-type"> CheckTextRequestInput)</span> {
+  check(input: <span class="hljs-code">$input</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">averageLevenshteinPercentage</span>
+    <span class="hljs-symbol">possibleTypos <span class="hljs-tag">{
+      <span class="hljs-symbol">provided</span>
+      <span class="hljs-symbol">source</span>
     }</span></span>
-    <span class="hljs-symbol">name</span>
+    <span class="hljs-symbol">sections <span class="hljs-tag">{
+      <span class="hljs-symbol">answerSentence</span>
+      <span class="hljs-symbol">levenshteinPercentage</span>
+      <span class="hljs-symbol">quizSentence</span>
+      <span class="hljs-symbol">section</span>
+    }</span></span>
   }</span></span>
-}</span></span>
+}
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-variables-example">
+                  <h5>Variables</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"input"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">CheckTextRequestInput</span><span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
                   </html>
@@ -378,12 +529,110 @@ https://odysseia-greek.com/graphql
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-    <span class="hljs-attr">"authors"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
-      <span class="hljs-punctuation">{</span>
-        <span class="hljs-attr">"books"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Book</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
-      <span class="hljs-punctuation">}</span>
-    <span class="hljs-punctuation">]</span>
+    <span class="hljs-attr">"check"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"averageLevenshteinPercentage"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"possibleTypos"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Typo</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"sections"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">AnswerSection</span><span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="query-create" class="operation operation-query" data-traverse-target="query-create">
+            <div class="operation-group-name">
+              <a href="#group-Operations-Queries">Queries</a>
+            </div>
+            <h2 class="operation-heading ">
+              <code>create</code>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="operation-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Create a new Text in Herodotos</p>
+                </div>
+              </div>
+            </div>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="operation-response doc-copy-section">
+                  <h5>Response</h5>
+                  <p> Returns a <a href="#definition-Text"><code>Text</code></a>
+                  </p>
+                </div>
+                <div class="operation-arguments doc-copy-section">
+                  <h5>Arguments</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>input</code></span> - <span class="property-type"><a href="#definition-CreateTextInput"><code>CreateTextInput</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <h4 class="example-heading">Example</h4>
+                <div class="example-section example-section-is-code operation-query-example">
+                  <h5>Query</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> Create<span class="hljs-tag">(<span class="hljs-code">$input</span>:<span class="hljs-type"> CreateTextInput)</span> {
+  create(input: <span class="hljs-code">$input</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">author</span>
+    <span class="hljs-symbol">book</span>
+    <span class="hljs-symbol">perseusTextLink</span>
+    <span class="hljs-symbol">reference</span>
+    <span class="hljs-symbol">rhemai <span class="hljs-tag">{
+      <span class="hljs-symbol">greek</span>
+      <span class="hljs-symbol">section</span>
+      <span class="hljs-symbol">translations</span>
+    }</span></span>
+    <span class="hljs-symbol">type</span>
+  }</span></span>
+}
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-variables-example">
+                  <h5>Variables</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"input"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">CreateTextInput</span><span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-response-example">
+                  <h5>Response</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"create"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"author"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"book"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"perseusTextLink"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"reference"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"rhemai"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Rhema</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+    <span class="hljs-punctuation">}</span>
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
@@ -412,7 +661,7 @@ https://odysseia-greek.com/graphql
               <div class="doc-copy">
                 <div class="operation-response doc-copy-section">
                   <h5>Response</h5>
-                  <p> Returns <a href="#definition-Hit"><code>[Hit]</code></a>
+                  <p> Returns an <a href="#definition-ExtendedDictionary"><code>ExtendedDictionary</code></a>
                   </p>
                 </div>
                 <div class="operation-arguments doc-copy-section">
@@ -444,6 +693,12 @@ https://odysseia-greek.com/graphql
                         </td>
                         <td> Default = <code>""</code> </td>
                       </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>searchInText</code></span> - <span class="property-type"><a href="#definition-Boolean"><code>Boolean</code></a></span>
+                        </td>
+                        <td> Default = <code>false</code> </td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -457,18 +712,33 @@ https://odysseia-greek.com/graphql
                     <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> Dictionary<span class="hljs-tag">(
   <span class="hljs-code">$word</span>:<span class="hljs-type"> String,</span>
   <span class="hljs-code">$language</span>:<span class="hljs-type"> String,</span>
-  <span class="hljs-code">$mode</span>:<span class="hljs-type"> String
+  <span class="hljs-code">$mode</span>:<span class="hljs-type"> String,</span>
+  <span class="hljs-code">$searchInText</span>:<span class="hljs-type"> Boolean
 </span>)</span> <span class="hljs-tag">{
   <span class="hljs-symbol">dictionary<span class="hljs-tag">(
     word: <span class="hljs-code">$word</span>,
     language: <span class="hljs-code">$language</span>,
-    mode: <span class="hljs-code">$mode</span>
+    mode: <span class="hljs-code">$mode</span>,
+    searchInText: <span class="hljs-code">$searchInText</span>
   )</span> <span class="hljs-tag">{
-    <span class="hljs-symbol">dutch</span>
-    <span class="hljs-symbol">english</span>
-    <span class="hljs-symbol">greek</span>
-    <span class="hljs-symbol">linkedWord</span>
-    <span class="hljs-symbol">original</span>
+    <span class="hljs-symbol">hits <span class="hljs-tag">{
+      <span class="hljs-symbol">foundInText <span class="hljs-tag">{
+        <span class="hljs-symbol">conjugations <span class="hljs-tag">{
+          <span class="hljs-type">...ConjugationResponseFragment</span>
+        }</span></span>
+        <span class="hljs-symbol">results <span class="hljs-tag">{
+          <span class="hljs-type">...AnalyzeResultFragment</span>
+        }</span></span>
+        <span class="hljs-symbol">rootword</span>
+      }</span></span>
+      <span class="hljs-symbol">hit <span class="hljs-tag">{
+        <span class="hljs-symbol">dutch</span>
+        <span class="hljs-symbol">english</span>
+        <span class="hljs-symbol">greek</span>
+        <span class="hljs-symbol">linkedWord</span>
+        <span class="hljs-symbol">original</span>
+      }</span></span>
+    }</span></span>
   }</span></span>
 }</span></span>
 </code></pre>
@@ -482,7 +752,8 @@ https://odysseia-greek.com/graphql
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"word"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"language"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">""</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"mode"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">""</span>
+  <span class="hljs-attr">"mode"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">""</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"searchInText"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -494,15 +765,7 @@ https://odysseia-greek.com/graphql
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-    <span class="hljs-attr">"dictionary"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
-      <span class="hljs-punctuation">{</span>
-        <span class="hljs-attr">"dutch"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">"english"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">"greek"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">"linkedWord"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">"original"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
-      <span class="hljs-punctuation">}</span>
-    <span class="hljs-punctuation">]</span>
+    <span class="hljs-attr">"dictionary"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">"hits"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">ExtendedDictionaryEntry</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">}</span>
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
@@ -577,7 +840,7 @@ https://odysseia-greek.com/graphql
                   <h5>Variables</h5>
                   <html>
                     <head></head>
-                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"word"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">}</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"word"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
                   </html>
@@ -590,9 +853,9 @@ https://odysseia-greek.com/graphql
   <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
     <span class="hljs-attr">"grammar"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
       <span class="hljs-punctuation">{</span>
-        <span class="hljs-attr">"rootWord"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">"rule"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">"translation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"rootWord"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"rule"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"translation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
         <span class="hljs-attr">"word"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
       <span class="hljs-punctuation">}</span>
     <span class="hljs-punctuation">]</span>
@@ -670,7 +933,7 @@ https://odysseia-greek.com/graphql
                   <h5>Variables</h5>
                   <html>
                     <head></head>
-                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"quizType"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">}</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"quizType"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
                   </html>
@@ -713,13 +976,6 @@ https://odysseia-greek.com/graphql
                     <tbody>
                       <tr>
                         <td>
-                          <span class="property-name"><code>quizType</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
                           <span class="property-name"><code>theme</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
@@ -728,6 +984,13 @@ https://odysseia-greek.com/graphql
                       <tr>
                         <td>
                           <span class="property-name"><code>set</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>quizType</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
                         </td>
@@ -743,14 +1006,14 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> Quiz<span class="hljs-tag">(
-  <span class="hljs-code">$quizType</span>:<span class="hljs-type"> String,</span>
   <span class="hljs-code">$theme</span>:<span class="hljs-type"> String,</span>
-  <span class="hljs-code">$set</span>:<span class="hljs-type"> String
+  <span class="hljs-code">$set</span>:<span class="hljs-type"> String,</span>
+  <span class="hljs-code">$quizType</span>:<span class="hljs-type"> String
 </span>)</span> <span class="hljs-tag">{
   <span class="hljs-symbol">quiz<span class="hljs-tag">(
-    quizType: <span class="hljs-code">$quizType</span>,
     theme: <span class="hljs-code">$theme</span>,
-    set: <span class="hljs-code">$set</span>
+    set: <span class="hljs-code">$set</span>,
+    quizType: <span class="hljs-code">$quizType</span>
   )</span> <span class="hljs-tag">{
    <span class="hljs-type"> ... on QuizResponse <span class="hljs-tag">{
       <span class="hljs-symbol">options <span class="hljs-tag">{
@@ -793,9 +1056,9 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"quizType"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"theme"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"set"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+  <span class="hljs-attr">"theme"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"set"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"quizType"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -806,113 +1069,6 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">"quiz"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">QuizResponse</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">}</span>
-</code></pre>
-                    </body>
-                  </html>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section id="query-sentence" class="operation operation-query" data-traverse-target="query-sentence">
-            <div class="operation-group-name">
-              <a href="#group-Operations-Queries">Queries</a>
-            </div>
-            <h2 class="operation-heading ">
-              <code>sentence</code>
-            </h2>
-            <div class="doc-row">
-              <div class="doc-copy">
-                <div class="operation-description doc-copy-section">
-                  <h5>Description</h5>
-                  <p>Create a new Question in Herodotos</p>
-                </div>
-              </div>
-            </div>
-            <div class="doc-row">
-              <div class="doc-copy">
-                <div class="operation-response doc-copy-section">
-                  <h5>Response</h5>
-                  <p> Returns a <a href="#definition-Sentence"><code>Sentence</code></a>
-                  </p>
-                </div>
-                <div class="operation-arguments doc-copy-section">
-                  <h5>Arguments</h5>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>book</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>author</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="doc-examples">
-                <h4 class="example-heading">Example</h4>
-                <div class="example-section example-section-is-code operation-query-example">
-                  <h5>Query</h5>
-                  <html>
-                    <head></head>
-                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> Sentence<span class="hljs-tag">(
-  <span class="hljs-code">$book</span>:<span class="hljs-type"> String,</span>
-  <span class="hljs-code">$author</span>:<span class="hljs-type"> String
-</span>)</span> <span class="hljs-tag">{
-  <span class="hljs-symbol">sentence<span class="hljs-tag">(
-    book: <span class="hljs-code">$book</span>,
-    author: <span class="hljs-code">$author</span>
-  )</span> <span class="hljs-tag">{
-    <span class="hljs-symbol">author</span>
-    <span class="hljs-symbol">book</span>
-    <span class="hljs-symbol">greek</span>
-    <span class="hljs-symbol">id</span>
-  }</span></span>
-}</span></span>
-</code></pre>
-                    </body>
-                  </html>
-                </div>
-                <div class="example-section example-section-is-code operation-variables-example">
-                  <h5>Variables</h5>
-                  <html>
-                    <head></head>
-                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"book"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"author"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
-<span class="hljs-punctuation">}</span>
-</code></pre>
-                    </body>
-                  </html>
-                </div>
-                <div class="example-section example-section-is-code operation-response-example">
-                  <h5>Response</h5>
-                  <html>
-                    <head></head>
-                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-    <span class="hljs-attr">"sentence"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-      <span class="hljs-attr">"author"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"book"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"greek"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
-    <span class="hljs-punctuation">}</span>
-  <span class="hljs-punctuation">}</span>
-<span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
                   </html>
@@ -1020,18 +1176,18 @@ https://odysseia-greek.com/graphql
               </div>
             </div>
           </section>
-          <section id="query-text" class="operation operation-query" data-traverse-target="query-text">
+          <section id="query-textOptions" class="operation operation-query" data-traverse-target="query-textOptions">
             <div class="operation-group-name">
               <a href="#group-Operations-Queries">Queries</a>
             </div>
             <h2 class="operation-heading ">
-              <code>text</code>
+              <code>textOptions</code>
             </h2>
             <div class="doc-row">
               <div class="doc-copy">
                 <div class="operation-description doc-copy-section">
                   <h5>Description</h5>
-                  <p>Check the text given</p>
+                  <p>Fetch options from Herodotos</p>
                 </div>
               </div>
             </div>
@@ -1039,42 +1195,8 @@ https://odysseia-greek.com/graphql
               <div class="doc-copy">
                 <div class="operation-response doc-copy-section">
                   <h5>Response</h5>
-                  <p> Returns a <a href="#definition-Text"><code>Text</code></a>
+                  <p> Returns an <a href="#definition-AggregationResult"><code>AggregationResult</code></a>
                   </p>
-                </div>
-                <div class="operation-arguments doc-copy-section">
-                  <h5>Arguments</h5>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>sentenceId</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>author</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>answer</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
                 </div>
               </div>
               <div class="doc-examples">
@@ -1083,54 +1205,19 @@ https://odysseia-greek.com/graphql
                   <h5>Query</h5>
                   <html>
                     <head></head>
-                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> Text<span class="hljs-tag">(
-  <span class="hljs-code">$sentenceId</span>:<span class="hljs-type"> String,</span>
-  <span class="hljs-code">$author</span>:<span class="hljs-type"> String,</span>
-  <span class="hljs-code">$answer</span>:<span class="hljs-type"> String
-</span>)</span> <span class="hljs-tag">{
-  <span class="hljs-symbol">text<span class="hljs-tag">(
-    sentenceId: <span class="hljs-code">$sentenceId</span>,
-    author: <span class="hljs-code">$author</span>,
-    answer: <span class="hljs-code">$answer</span>
-  )</span> <span class="hljs-tag">{
-    <span class="hljs-symbol"><span class="hljs-keyword">input</span></span>
-    <span class="hljs-symbol">levenshtein</span>
-    <span class="hljs-symbol">matches <span class="hljs-tag">{
-      <span class="hljs-symbol">index</span>
-      <span class="hljs-symbol">word</span>
-    }</span></span>
-    <span class="hljs-symbol">mistakes <span class="hljs-tag">{
-      <span class="hljs-symbol">index</span>
-      <span class="hljs-symbol">nonMatches <span class="hljs-tag">{
-        <span class="hljs-symbol">index</span>
-        <span class="hljs-symbol">levenshtein</span>
-        <span class="hljs-symbol">match</span>
-        <span class="hljs-symbol">percentage</span>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> TextOptions <span class="hljs-tag">{
+  <span class="hljs-symbol">textOptions <span class="hljs-tag">{
+    <span class="hljs-symbol">authors <span class="hljs-tag">{
+      <span class="hljs-symbol">books <span class="hljs-tag">{
+        <span class="hljs-symbol">key</span>
+        <span class="hljs-symbol">references <span class="hljs-tag">{
+          <span class="hljs-type">...ReferenceFragment</span>
+        }</span></span>
       }</span></span>
-      <span class="hljs-symbol">word</span>
-    }</span></span>
-    <span class="hljs-symbol">quiz</span>
-    <span class="hljs-symbol">splitAnswer <span class="hljs-tag">{
-      <span class="hljs-symbol">word</span>
-    }</span></span>
-    <span class="hljs-symbol">splitQuiz <span class="hljs-tag">{
-      <span class="hljs-symbol">word</span>
+      <span class="hljs-symbol">key</span>
     }</span></span>
   }</span></span>
 }</span></span>
-</code></pre>
-                    </body>
-                  </html>
-                </div>
-                <div class="example-section example-section-is-code operation-variables-example">
-                  <h5>Variables</h5>
-                  <html>
-                    <head></head>
-                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"sentenceId"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"author"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"answer"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
-<span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
                   </html>
@@ -1139,19 +1226,7 @@ https://odysseia-greek.com/graphql
                   <h5>Response</h5>
                   <html>
                     <head></head>
-                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-    <span class="hljs-attr">"text"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-      <span class="hljs-attr">"input"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"levenshtein"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"matches"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">matches</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"mistakes"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">mistakes</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"quiz"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"splitAnswer"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">word</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"splitQuiz"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">word</span><span class="hljs-punctuation">]</span>
-    <span class="hljs-punctuation">}</span>
-  <span class="hljs-punctuation">}</span>
-<span class="hljs-punctuation">}</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">"textOptions"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">"authors"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">ESAuthor</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
                   </html>
@@ -1196,7 +1271,7 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"highestSet"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"highestSet"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
@@ -1239,6 +1314,235 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"aggregates"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Aggregate</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-AggregationResult" class="definition definition-object" data-traverse-target="definition-AggregationResult">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">AggregationResult</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>authors</code></span> - <span class="property-type"><a href="#definition-ESAuthor"><code>[ESAuthor]</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"authors"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">ESAuthor</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-AnalyzeResult" class="definition definition-object" data-traverse-target="definition-AnalyzeResult">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">AnalyzeResult</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>author</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>book</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>reference</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>referenceLink</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>text</code></span> - <span class="property-type"><a href="#definition-Rhema"><code>Rhema</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"author"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"book"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"reference"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"referenceLink"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"text"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Rhema</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-AnalyzeTextResponse" class="definition definition-object" data-traverse-target="definition-AnalyzeTextResponse">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">AnalyzeTextResponse</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>conjugations</code></span> - <span class="property-type"><a href="#definition-ConjugationResponse"><code>[ConjugationResponse]</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>results</code></span> - <span class="property-type"><a href="#definition-AnalyzeResult"><code>[AnalyzeResult]</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>rootword</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"conjugations"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">ConjugationResponse</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"results"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">AnalyzeResult</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"rootword"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-AnswerSection" class="definition definition-object" data-traverse-target="definition-AnswerSection">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">AnswerSection</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>answerSentence</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>levenshteinPercentage</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>quizSentence</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>section</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"answerSentence"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"levenshteinPercentage"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"quizSentence"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"section"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+<span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
                   </html>
@@ -1289,11 +1593,27 @@ https://odysseia-greek.com/graphql
               </div>
             </div>
           </section>
-          <section id="definition-Authors" class="definition definition-object" data-traverse-target="definition-Authors">
+          <section id="definition-Boolean" class="definition definition-scalar" data-traverse-target="definition-Boolean">
             <div class="definition-group-name">
               <a href="#group-Types">Types</a>
             </div>
-            <h2 class="definition-heading">Authors</h2>
+            <h2 class="definition-heading">Boolean</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>The <code>Boolean</code> scalar type represents <code>true</code> or <code>false</code>.</p>
+                </div>
+              </div>
+              <div class="doc-examples">
+              </div>
+            </div>
+          </section>
+          <section id="definition-CheckTextRequestInput" class="definition definition-input-object" data-traverse-target="definition-CheckTextRequestInput">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">CheckTextRequestInput</h2>
             <div class="doc-row">
               <div class="doc-copy">
                 <div class="definition-properties doc-copy-section">
@@ -1301,19 +1621,35 @@ https://odysseia-greek.com/graphql
                   <table>
                     <thead>
                       <tr>
-                        <th>Field Name</th>
+                        <th>Input Field</th>
                         <th>Description</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td data-property-name=""><span class="property-name"><code>books</code></span> - <span class="property-type"><a href="#definition-Book"><code>[Book]</code></a></span>
+                        <td>
+                          <span class="property-name"><code>author</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
                         </td>
                       </tr>
                       <tr>
-                        <td data-property-name=""><span class="property-name"><code>name</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        <td>
+                          <span class="property-name"><code>book</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>reference</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>translations</code></span> - <span class="property-type"><a href="#definition-TranslationsInput"><code>[TranslationsInput]</code></a></span>
                         </td>
                         <td>
                         </td>
@@ -1328,8 +1664,10 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"books"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Book</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+  <span class="hljs-attr">"author"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"book"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"reference"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"translations"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">TranslationsInput</span><span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -1338,11 +1676,11 @@ https://odysseia-greek.com/graphql
               </div>
             </div>
           </section>
-          <section id="definition-Book" class="definition definition-object" data-traverse-target="definition-Book">
+          <section id="definition-CheckTextResponse" class="definition definition-object" data-traverse-target="definition-CheckTextResponse">
             <div class="definition-group-name">
               <a href="#group-Types">Types</a>
             </div>
-            <h2 class="definition-heading">Book</h2>
+            <h2 class="definition-heading">CheckTextResponse</h2>
             <div class="doc-row">
               <div class="doc-copy">
                 <div class="definition-properties doc-copy-section">
@@ -1356,7 +1694,19 @@ https://odysseia-greek.com/graphql
                     </thead>
                     <tbody>
                       <tr>
-                        <td data-property-name=""><span class="property-name"><code>book</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int</code></a></span>
+                        <td data-property-name=""><span class="property-name"><code>averageLevenshteinPercentage</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>possibleTypos</code></span> - <span class="property-type"><a href="#definition-Typo"><code>[Typo]</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>sections</code></span> - <span class="property-type"><a href="#definition-AnswerSection"><code>[AnswerSection]</code></a></span>
                         </td>
                         <td>
                         </td>
@@ -1370,27 +1720,15 @@ https://odysseia-greek.com/graphql
                   <h5>Example</h5>
                   <html>
                     <head></head>
-                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"book"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">}</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"averageLevenshteinPercentage"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"possibleTypos"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Typo</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"sections"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">AnswerSection</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
                   </html>
                 </div>
-              </div>
-            </div>
-          </section>
-          <section id="definition-Boolean" class="definition definition-scalar" data-traverse-target="definition-Boolean">
-            <div class="definition-group-name">
-              <a href="#group-Types">Types</a>
-            </div>
-            <h2 class="definition-heading">Boolean</h2>
-            <div class="doc-row">
-              <div class="doc-copy">
-                <div class="definition-description doc-copy-section">
-                  <h5>Description</h5>
-                  <p>The <code>Boolean</code> scalar type represents <code>true</code> or <code>false</code>.</p>
-                </div>
-              </div>
-              <div class="doc-examples">
               </div>
             </div>
           </section>
@@ -1418,7 +1756,7 @@ https://odysseia-greek.com/graphql
                         </td>
                       </tr>
                       <tr>
-                        <td data-property-name=""><span class="property-name"><code>foundInText</code></span> - <span class="property-type"><a href="#definition-FoundInText"><code>FoundInText</code></a></span>
+                        <td data-property-name=""><span class="property-name"><code>foundInText</code></span> - <span class="property-type"><a href="#definition-AnalyzeTextResponse"><code>AnalyzeTextResponse</code></a></span>
                         </td>
                         <td>
                         </td>
@@ -1452,10 +1790,126 @@ https://odysseia-greek.com/graphql
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"correct"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"foundInText"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FoundInText</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"foundInText"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">AnalyzeTextResponse</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"progress"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Progress</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"quizWord"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"similarWords"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Hit</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-ConjugationResponse" class="definition definition-object" data-traverse-target="definition-ConjugationResponse">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">ConjugationResponse</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>rule</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>word</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"rule"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"word"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-CreateTextInput" class="definition definition-input-object" data-traverse-target="definition-CreateTextInput">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">CreateTextInput</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Input Field</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>reference</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>section</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>author</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>book</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"reference"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"section"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"author"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"book"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -1515,10 +1969,10 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"clusterName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"clusterName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"healthy"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"serverName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"serverVersion"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+  <span class="hljs-attr">"serverName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"serverVersion"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -1578,7 +2032,7 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"introduction"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"introduction"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"linkToPerseus"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"section"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"speakers"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Speaker</span><span class="hljs-punctuation">]</span>
@@ -1643,7 +2097,7 @@ https://odysseia-greek.com/graphql
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"answer"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">DialogueContent</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"input"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">DialogueContent</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"percentage"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987.65</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"percentage"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123.45</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"wronglyPlaced"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">DialogueCorrection</span><span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
@@ -1704,8 +2158,8 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"greek"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"place"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"greek"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"place"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"speaker"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"translation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
 <span class="hljs-punctuation">}</span>
@@ -1773,7 +2227,7 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"correctPlace"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"correctPlace"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"greek"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"place"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"speaker"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
@@ -1805,20 +2259,6 @@ https://odysseia-greek.com/graphql
                     <tbody>
                       <tr>
                         <td>
-                          <span class="property-name"><code>place</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>speaker</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
                           <span class="property-name"><code>translation</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
@@ -1827,6 +2267,20 @@ https://odysseia-greek.com/graphql
                       <tr>
                         <td>
                           <span class="property-name"><code>greek</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>place</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>speaker</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
                         </td>
@@ -1841,10 +2295,10 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"place"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"speaker"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"translation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"greek"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+  <span class="hljs-attr">"translation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"greek"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"place"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"speaker"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -1921,7 +2375,194 @@ https://odysseia-greek.com/graphql
   <span class="hljs-attr">"quizMetadata"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">QuizMetadata</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"quizType"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"set"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"theme"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+  <span class="hljs-attr">"theme"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-ESAuthor" class="definition definition-object" data-traverse-target="definition-ESAuthor">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">ESAuthor</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>books</code></span> - <span class="property-type"><a href="#definition-ESBook"><code>[ESBook]</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>key</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"books"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">ESBook</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"key"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-ESBook" class="definition definition-object" data-traverse-target="definition-ESBook">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">ESBook</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>key</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>references</code></span> - <span class="property-type"><a href="#definition-Reference"><code>[Reference]</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"key"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"references"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Reference</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-ExtendedDictionary" class="definition definition-object" data-traverse-target="definition-ExtendedDictionary">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">ExtendedDictionary</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>hits</code></span> - <span class="property-type"><a href="#definition-ExtendedDictionaryEntry"><code>[ExtendedDictionaryEntry]</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"hits"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">ExtendedDictionaryEntry</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-ExtendedDictionaryEntry" class="definition definition-object" data-traverse-target="definition-ExtendedDictionaryEntry">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">ExtendedDictionaryEntry</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>foundInText</code></span> - <span class="property-type"><a href="#definition-AnalyzeTextResponse"><code>AnalyzeTextResponse</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>hit</code></span> - <span class="property-type"><a href="#definition-Hit"><code>Hit</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"foundInText"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">AnalyzeTextResponse</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"hit"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Hit</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -1947,47 +2588,7 @@ https://odysseia-greek.com/graphql
                   <h5>Example</h5>
                   <html>
                     <head></head>
-                    <body><pre><code class="hljs language-json"><span class="hljs-number">123.45</span>
-</code></pre>
-                    </body>
-                  </html>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section id="definition-FoundInText" class="definition definition-object" data-traverse-target="definition-FoundInText">
-            <div class="definition-group-name">
-              <a href="#group-Types">Types</a>
-            </div>
-            <h2 class="definition-heading">FoundInText</h2>
-            <div class="doc-row">
-              <div class="doc-copy">
-                <div class="definition-properties doc-copy-section">
-                  <h5>Fields</h5>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Field Name</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td data-property-name=""><span class="property-name"><code>rhemai</code></span> - <span class="property-type"><a href="#definition-Rhema"><code>[Rhema]</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="doc-examples">
-                <div class="example-section example-section-is-code">
-                  <h5>Example</h5>
-                  <html>
-                    <head></head>
-                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"rhemai"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Rhema</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">}</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-number">987.65</span>
 </code></pre>
                     </body>
                   </html>
@@ -2192,8 +2793,8 @@ https://odysseia-greek.com/graphql
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"audioUrl"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"imageUrl"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"option"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+  <span class="hljs-attr">"imageUrl"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"option"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -2246,7 +2847,7 @@ https://odysseia-greek.com/graphql
                   <h5>Example</h5>
                   <html>
                     <head></head>
-                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"averageAccuracy"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987.65</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"timesCorrect"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"timesIncorrect"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">}</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"averageAccuracy"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123.45</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"timesCorrect"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"timesIncorrect"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
                   </html>
@@ -2334,7 +2935,7 @@ https://odysseia-greek.com/graphql
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"options"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Options</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"quizItem"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+  <span class="hljs-attr">"quizItem"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -2379,6 +2980,55 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-gql"><span class="hljs-symbol">QuizResponse</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-Reference" class="definition definition-object" data-traverse-target="definition-Reference">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">Reference</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>key</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>sections</code></span> - <span class="property-type"><a href="#definition-Section"><code>[Section]</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"key"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"sections"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Section</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
                   </html>
@@ -2437,10 +3087,10 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"rootWord"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"rule"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"translation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"word"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+  <span class="hljs-attr">"rootWord"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"rule"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"translation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"word"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -2467,37 +3117,13 @@ https://odysseia-greek.com/graphql
                     </thead>
                     <tbody>
                       <tr>
-                        <td data-property-name=""><span class="property-name"><code>author</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td data-property-name=""><span class="property-name"><code>book</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td data-property-name=""><span class="property-name"><code>chapter</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
                         <td data-property-name=""><span class="property-name"><code>greek</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
                         </td>
                       </tr>
                       <tr>
-                        <td data-property-name=""><span class="property-name"><code>perseusTextLink</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td data-property-name=""><span class="property-name"><code>section</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int</code></a></span>
+                        <td data-property-name=""><span class="property-name"><code>section</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
                         </td>
@@ -2518,12 +3144,8 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"author"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"book"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"chapter"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"greek"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"perseusTextLink"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"section"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"greek"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"section"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"translations"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"abc123"</span><span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
@@ -2533,11 +3155,11 @@ https://odysseia-greek.com/graphql
               </div>
             </div>
           </section>
-          <section id="definition-Sentence" class="definition definition-object" data-traverse-target="definition-Sentence">
+          <section id="definition-Section" class="definition definition-object" data-traverse-target="definition-Section">
             <div class="definition-group-name">
               <a href="#group-Types">Types</a>
             </div>
-            <h2 class="definition-heading">Sentence</h2>
+            <h2 class="definition-heading">Section</h2>
             <div class="doc-row">
               <div class="doc-copy">
                 <div class="definition-properties doc-copy-section">
@@ -2551,25 +3173,7 @@ https://odysseia-greek.com/graphql
                     </thead>
                     <tbody>
                       <tr>
-                        <td data-property-name=""><span class="property-name"><code>author</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td data-property-name=""><span class="property-name"><code>book</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td data-property-name=""><span class="property-name"><code>greek</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td data-property-name=""><span class="property-name"><code>id</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        <td data-property-name=""><span class="property-name"><code>key</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
                         </td>
@@ -2583,12 +3187,7 @@ https://odysseia-greek.com/graphql
                   <h5>Example</h5>
                   <html>
                     <head></head>
-                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"author"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"book"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"greek"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
-<span class="hljs-punctuation">}</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"key"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
                   </html>
@@ -2643,7 +3242,7 @@ https://odysseia-greek.com/graphql
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"shorthand"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"translation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+  <span class="hljs-attr">"translation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -2716,7 +3315,7 @@ https://odysseia-greek.com/graphql
   <span class="hljs-attr">"alexandros"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Health</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"dionysios"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Health</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"herodotos"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Health</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"overallHealth"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"overallHealth"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"sokrates"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Health</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
@@ -2769,43 +3368,37 @@ https://odysseia-greek.com/graphql
                     </thead>
                     <tbody>
                       <tr>
-                        <td data-property-name=""><span class="property-name"><code>input</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        <td data-property-name=""><span class="property-name"><code>author</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
                         </td>
                       </tr>
                       <tr>
-                        <td data-property-name=""><span class="property-name"><code>levenshtein</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        <td data-property-name=""><span class="property-name"><code>book</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
                         </td>
                       </tr>
                       <tr>
-                        <td data-property-name=""><span class="property-name"><code>matches</code></span> - <span class="property-type"><a href="#definition-matches"><code>[matches]</code></a></span>
+                        <td data-property-name=""><span class="property-name"><code>perseusTextLink</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
                         </td>
                       </tr>
                       <tr>
-                        <td data-property-name=""><span class="property-name"><code>mistakes</code></span> - <span class="property-type"><a href="#definition-mistakes"><code>[mistakes]</code></a></span>
+                        <td data-property-name=""><span class="property-name"><code>reference</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
                         </td>
                       </tr>
                       <tr>
-                        <td data-property-name=""><span class="property-name"><code>quiz</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        <td data-property-name=""><span class="property-name"><code>rhemai</code></span> - <span class="property-type"><a href="#definition-Rhema"><code>[Rhema]</code></a></span>
                         </td>
                         <td>
                         </td>
                       </tr>
                       <tr>
-                        <td data-property-name=""><span class="property-name"><code>splitAnswer</code></span> - <span class="property-type"><a href="#definition-word"><code>[word]</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td data-property-name=""><span class="property-name"><code>splitQuiz</code></span> - <span class="property-type"><a href="#definition-word"><code>[word]</code></a></span>
+                        <td data-property-name=""><span class="property-name"><code>type</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
                         </td>
@@ -2820,13 +3413,12 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"input"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"levenshtein"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"matches"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">matches</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"mistakes"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">mistakes</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"quiz"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"splitAnswer"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">word</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"splitQuiz"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">word</span><span class="hljs-punctuation">]</span>
+  <span class="hljs-attr">"author"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"book"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"perseusTextLink"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"reference"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"rhemai"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Rhema</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -2835,11 +3427,11 @@ https://odysseia-greek.com/graphql
               </div>
             </div>
           </section>
-          <section id="definition-matches" class="definition definition-object" data-traverse-target="definition-matches">
+          <section id="definition-TranslationsInput" class="definition definition-input-object" data-traverse-target="definition-TranslationsInput">
             <div class="definition-group-name">
               <a href="#group-Types">Types</a>
             </div>
-            <h2 class="definition-heading">matches</h2>
+            <h2 class="definition-heading">TranslationsInput</h2>
             <div class="doc-row">
               <div class="doc-copy">
                 <div class="definition-properties doc-copy-section">
@@ -2847,71 +3439,21 @@ https://odysseia-greek.com/graphql
                   <table>
                     <thead>
                       <tr>
-                        <th>Field Name</th>
+                        <th>Input Field</th>
                         <th>Description</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td data-property-name=""><span class="property-name"><code>index</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int</code></a></span>
+                        <td>
+                          <span class="property-name"><code>translation</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
                         </td>
                       </tr>
                       <tr>
-                        <td data-property-name=""><span class="property-name"><code>word</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
                         <td>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="doc-examples">
-                <div class="example-section example-section-is-code">
-                  <h5>Example</h5>
-                  <html>
-                    <head></head>
-                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"index"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"word"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">}</span>
-</code></pre>
-                    </body>
-                  </html>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section id="definition-mistakes" class="definition definition-object" data-traverse-target="definition-mistakes">
-            <div class="definition-group-name">
-              <a href="#group-Types">Types</a>
-            </div>
-            <h2 class="definition-heading">mistakes</h2>
-            <div class="doc-row">
-              <div class="doc-copy">
-                <div class="definition-properties doc-copy-section">
-                  <h5>Fields</h5>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Field Name</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td data-property-name=""><span class="property-name"><code>index</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td data-property-name=""><span class="property-name"><code>nonMatches</code></span> - <span class="property-type"><a href="#definition-nonMatches"><code>[nonMatches]</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td data-property-name=""><span class="property-name"><code>word</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                          <span class="property-name"><code>section</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
                         </td>
@@ -2926,9 +3468,8 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"index"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"nonMatches"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">nonMatches</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"word"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+  <span class="hljs-attr">"translation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"section"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -2937,11 +3478,11 @@ https://odysseia-greek.com/graphql
               </div>
             </div>
           </section>
-          <section id="definition-nonMatches" class="definition definition-object" data-traverse-target="definition-nonMatches">
+          <section id="definition-Typo" class="definition definition-object" data-traverse-target="definition-Typo">
             <div class="definition-group-name">
               <a href="#group-Types">Types</a>
             </div>
-            <h2 class="definition-heading">nonMatches</h2>
+            <h2 class="definition-heading">Typo</h2>
             <div class="doc-row">
               <div class="doc-copy">
                 <div class="definition-properties doc-copy-section">
@@ -2955,25 +3496,13 @@ https://odysseia-greek.com/graphql
                     </thead>
                     <tbody>
                       <tr>
-                        <td data-property-name=""><span class="property-name"><code>index</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int</code></a></span>
+                        <td data-property-name=""><span class="property-name"><code>provided</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
                         </td>
                       </tr>
                       <tr>
-                        <td data-property-name=""><span class="property-name"><code>levenshtein</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td data-property-name=""><span class="property-name"><code>match</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td data-property-name=""><span class="property-name"><code>percentage</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        <td data-property-name=""><span class="property-name"><code>source</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
                         </td>
@@ -2988,51 +3517,9 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"index"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"levenshtein"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"match"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"percentage"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+  <span class="hljs-attr">"provided"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"source"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
 <span class="hljs-punctuation">}</span>
-</code></pre>
-                    </body>
-                  </html>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section id="definition-word" class="definition definition-object" data-traverse-target="definition-word">
-            <div class="definition-group-name">
-              <a href="#group-Types">Types</a>
-            </div>
-            <h2 class="definition-heading">word</h2>
-            <div class="doc-row">
-              <div class="doc-copy">
-                <div class="definition-properties doc-copy-section">
-                  <h5>Fields</h5>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Field Name</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td data-property-name=""><span class="property-name"><code>word</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="doc-examples">
-                <div class="example-section example-section-is-code">
-                  <h5>Example</h5>
-                  <html>
-                    <head></head>
-                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"word"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
                   </html>

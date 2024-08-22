@@ -55,7 +55,6 @@
           <div class="nav-group">
             <h4 class="nav-group-title">Types</h4>
             <ul class="nav-group-items">
-              <li><a href="#definition-Aggregate">Aggregate</a></li>
               <li><a href="#definition-AggregateResult">AggregateResult</a></li>
               <li><a href="#definition-AggregationResult">AggregationResult</a></li>
               <li><a href="#definition-AnalyzeResult">AnalyzeResult</a></li>
@@ -94,10 +93,12 @@
               <li><a href="#definition-Result">Result</a></li>
               <li><a href="#definition-Rhema">Rhema</a></li>
               <li><a href="#definition-Section">Section</a></li>
+              <li><a href="#definition-Segments">Segments</a></li>
               <li><a href="#definition-Speaker">Speaker</a></li>
               <li><a href="#definition-Status">Status</a></li>
               <li><a href="#definition-String">String</a></li>
               <li><a href="#definition-Text">Text</a></li>
+              <li><a href="#definition-Themes">Themes</a></li>
               <li><a href="#definition-TranslationsInput">TranslationsInput</a></li>
               <li><a href="#definition-Typo">Typo</a></li>
             </ul>
@@ -338,6 +339,13 @@ https://odysseia-greek.com/graphql
                         <td>
                         </td>
                       </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>segment</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -355,7 +363,8 @@ https://odysseia-greek.com/graphql
   <span class="hljs-code">$comprehensive</span>:<span class="hljs-type"> Boolean,</span>
   <span class="hljs-code">$dialogue</span>: <span class="hljs-type">[DialogueInput]</span>,
   <span class="hljs-code">$theme</span>:<span class="hljs-type"> String,</span>
-  <span class="hljs-code">$set</span>:<span class="hljs-type"> String
+  <span class="hljs-code">$set</span>:<span class="hljs-type"> String,</span>
+  <span class="hljs-code">$segment</span>:<span class="hljs-type"> String
 </span>)</span> <span class="hljs-tag">{
   <span class="hljs-symbol">answer<span class="hljs-tag">(
     quizType: <span class="hljs-code">$quizType</span>,
@@ -364,7 +373,8 @@ https://odysseia-greek.com/graphql
     comprehensive: <span class="hljs-code">$comprehensive</span>,
     dialogue: <span class="hljs-code">$dialogue</span>,
     theme: <span class="hljs-code">$theme</span>,
-    set: <span class="hljs-code">$set</span>
+    set: <span class="hljs-code">$set</span>,
+    segment: <span class="hljs-code">$segment</span>
   )</span> <span class="hljs-tag">{
    <span class="hljs-type"> ... on ComprehensiveResponse <span class="hljs-tag">{
       <span class="hljs-symbol">correct</span>
@@ -430,13 +440,14 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"quizType"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"quizWord"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"quizType"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"quizWord"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"answer"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"comprehensive"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"comprehensive"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"dialogue"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">DialogueInput</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"theme"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"set"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+  <span class="hljs-attr">"theme"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"set"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"segment"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -538,7 +549,7 @@ https://odysseia-greek.com/graphql
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
     <span class="hljs-attr">"check"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-      <span class="hljs-attr">"averageLevenshteinPercentage"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"averageLevenshteinPercentage"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">"possibleTypos"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Typo</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">"sections"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">AnswerSection</span><span class="hljs-punctuation">]</span>
     <span class="hljs-punctuation">}</span>
@@ -636,7 +647,7 @@ https://odysseia-greek.com/graphql
     <span class="hljs-attr">"create"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
       <span class="hljs-attr">"author"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">"book"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"perseusTextLink"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"perseusTextLink"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">"reference"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">"rhemai"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Rhema</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
@@ -758,7 +769,7 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"word"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"word"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"language"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">""</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"mode"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">""</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"searchInText"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span>
@@ -848,7 +859,7 @@ https://odysseia-greek.com/graphql
                   <h5>Variables</h5>
                   <html>
                     <head></head>
-                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"word"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">}</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"word"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
                   </html>
@@ -861,9 +872,9 @@ https://odysseia-greek.com/graphql
   <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
     <span class="hljs-attr">"grammar"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
       <span class="hljs-punctuation">{</span>
-        <span class="hljs-attr">"rootWord"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"rootWord"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
         <span class="hljs-attr">"rule"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">"translation"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"translation"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"abc123"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
         <span class="hljs-attr">"word"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
       <span class="hljs-punctuation">}</span>
     <span class="hljs-punctuation">]</span>
@@ -927,9 +938,12 @@ https://odysseia-greek.com/graphql
                     <head></head>
                     <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> Options<span class="hljs-tag">(<span class="hljs-code">$quizType</span>:<span class="hljs-type"> String)</span> {
   options(quizType: <span class="hljs-code">$quizType</span>)</span> <span class="hljs-tag">{
-    <span class="hljs-symbol">aggregates <span class="hljs-tag">{
-      <span class="hljs-symbol">highestSet</span>
+    <span class="hljs-symbol">themes <span class="hljs-tag">{
       <span class="hljs-symbol">name</span>
+      <span class="hljs-symbol">segments <span class="hljs-tag">{
+        <span class="hljs-symbol">maxSet</span>
+        <span class="hljs-symbol">name</span>
+      }</span></span>
     }</span></span>
   }</span></span>
 }
@@ -941,7 +955,7 @@ https://odysseia-greek.com/graphql
                   <h5>Variables</h5>
                   <html>
                     <head></head>
-                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"quizType"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">}</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"quizType"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
                   </html>
@@ -950,7 +964,7 @@ https://odysseia-greek.com/graphql
                   <h5>Response</h5>
                   <html>
                     <head></head>
-                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">"options"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">"aggregates"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Aggregate</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">}</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">"options"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">"themes"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Themes</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
                   </html>
@@ -984,7 +998,7 @@ https://odysseia-greek.com/graphql
                     <tbody>
                       <tr>
                         <td>
-                          <span class="property-name"><code>set</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                          <span class="property-name"><code>segment</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
                         </td>
@@ -1017,6 +1031,13 @@ https://odysseia-greek.com/graphql
                         <td>
                         </td>
                       </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>set</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -1028,18 +1049,20 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> Quiz<span class="hljs-tag">(
-  <span class="hljs-code">$set</span>:<span class="hljs-type"> String,</span>
+  <span class="hljs-code">$segment</span>:<span class="hljs-type"> String,</span>
   <span class="hljs-code">$quizType</span>:<span class="hljs-type"> String,</span>
   <span class="hljs-code">$order</span>:<span class="hljs-type"> String,</span>
   <span class="hljs-code">$excludeWords</span>: <span class="hljs-type">[String]</span>,
-  <span class="hljs-code">$theme</span>:<span class="hljs-type"> String
+  <span class="hljs-code">$theme</span>:<span class="hljs-type"> String,</span>
+  <span class="hljs-code">$set</span>:<span class="hljs-type"> String
 </span>)</span> <span class="hljs-tag">{
   <span class="hljs-symbol">quiz<span class="hljs-tag">(
-    set: <span class="hljs-code">$set</span>,
+    segment: <span class="hljs-code">$segment</span>,
     quizType: <span class="hljs-code">$quizType</span>,
     order: <span class="hljs-code">$order</span>,
     excludeWords: <span class="hljs-code">$excludeWords</span>,
-    theme: <span class="hljs-code">$theme</span>
+    theme: <span class="hljs-code">$theme</span>,
+    set: <span class="hljs-code">$set</span>
   )</span> <span class="hljs-tag">{
    <span class="hljs-type"> ... on QuizResponse <span class="hljs-tag">{
       <span class="hljs-symbol">numberOfItems</span>
@@ -1095,11 +1118,12 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"set"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"segment"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"quizType"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"order"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"excludeWords"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"theme"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+  <span class="hljs-attr">"excludeWords"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"abc123"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"theme"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"set"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -1276,56 +1300,7 @@ https://odysseia-greek.com/graphql
             </div>
           </section>
           <h1 id="group-Types" class="group-heading" data-traverse-target="group-Types">Types</h1>
-          <section id="definition-Aggregate" class="definition definition-object" data-traverse-target="definition-Aggregate">
-            <h2 class="definition-heading">Aggregate</h2>
-            <div class="doc-row">
-              <div class="doc-copy">
-                <div class="definition-properties doc-copy-section">
-                  <h5>Fields</h5>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Field Name</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td data-property-name=""><span class="property-name"><code>highestSet</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td data-property-name=""><span class="property-name"><code>name</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="doc-examples">
-                <div class="example-section example-section-is-code">
-                  <h5>Example</h5>
-                  <html>
-                    <head></head>
-                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"highestSet"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
-<span class="hljs-punctuation">}</span>
-</code></pre>
-                    </body>
-                  </html>
-                </div>
-              </div>
-            </div>
-          </section>
           <section id="definition-AggregateResult" class="definition definition-object" data-traverse-target="definition-AggregateResult">
-            <div class="definition-group-name">
-              <a href="#group-Types">Types</a>
-            </div>
             <h2 class="definition-heading">AggregateResult</h2>
             <div class="doc-row">
               <div class="doc-copy">
@@ -1340,7 +1315,7 @@ https://odysseia-greek.com/graphql
                     </thead>
                     <tbody>
                       <tr>
-                        <td data-property-name=""><span class="property-name"><code>aggregates</code></span> - <span class="property-type"><a href="#definition-Aggregate"><code>[Aggregate]</code></a></span>
+                        <td data-property-name=""><span class="property-name"><code>themes</code></span> - <span class="property-type"><a href="#definition-Themes"><code>[Themes]</code></a></span>
                         </td>
                         <td>
                         </td>
@@ -1354,7 +1329,7 @@ https://odysseia-greek.com/graphql
                   <h5>Example</h5>
                   <html>
                     <head></head>
-                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"aggregates"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Aggregate</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">}</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"themes"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Themes</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
                   </html>
@@ -1459,8 +1434,8 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"author"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"book"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"author"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"book"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"reference"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"referenceLink"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"text"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Rhema</span>
@@ -1519,7 +1494,7 @@ https://odysseia-greek.com/graphql
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"conjugations"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">ConjugationResponse</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"results"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">AnalyzeResult</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"rootword"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+  <span class="hljs-attr">"rootword"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -1579,10 +1554,10 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"answerSentence"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"answerSentence"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"levenshteinPercentage"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"quizSentence"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"section"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+  <span class="hljs-attr">"quizSentence"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"section"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -1690,8 +1665,8 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"correct"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"numberOfItems"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"correct"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"numberOfItems"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"quizWord"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"wordsInText"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
@@ -1753,10 +1728,10 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"fullSentence"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"fullSentence"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"quiz"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">QuizResponse</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"reference"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"translation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+  <span class="hljs-attr">"reference"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"translation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -1809,20 +1784,6 @@ https://odysseia-greek.com/graphql
                     <tbody>
                       <tr>
                         <td>
-                          <span class="property-name"><code>reference</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>translations</code></span> - <span class="property-type"><a href="#definition-TranslationsInput"><code>[TranslationsInput]</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
                           <span class="property-name"><code>author</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
@@ -1831,6 +1792,20 @@ https://odysseia-greek.com/graphql
                       <tr>
                         <td>
                           <span class="property-name"><code>book</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>reference</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>translations</code></span> - <span class="property-type"><a href="#definition-TranslationsInput"><code>[TranslationsInput]</code></a></span>
                         </td>
                         <td>
                         </td>
@@ -1845,10 +1820,10 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"reference"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"translations"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">TranslationsInput</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"author"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"book"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+  <span class="hljs-attr">"book"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"reference"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"translations"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">TranslationsInput</span><span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -2022,7 +1997,7 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"rule"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"rule"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"word"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
@@ -2051,13 +2026,6 @@ https://odysseia-greek.com/graphql
                     <tbody>
                       <tr>
                         <td>
-                          <span class="property-name"><code>section</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
                           <span class="property-name"><code>author</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
@@ -2077,6 +2045,13 @@ https://odysseia-greek.com/graphql
                         <td>
                         </td>
                       </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>section</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -2087,10 +2062,10 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"section"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"author"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"book"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"reference"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+  <span class="hljs-attr">"reference"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"section"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -2213,8 +2188,8 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"introduction"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"linkToPerseus"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"introduction"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"linkToPerseus"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"section"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"speakers"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Speaker</span><span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
@@ -2339,10 +2314,10 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"greek"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"greek"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"place"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"speaker"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"translation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+  <span class="hljs-attr">"translation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -2409,9 +2384,9 @@ https://odysseia-greek.com/graphql
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"correctPlace"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"greek"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"place"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"speaker"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"greek"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"place"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"speaker"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"translation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
@@ -2440,13 +2415,6 @@ https://odysseia-greek.com/graphql
                     <tbody>
                       <tr>
                         <td>
-                          <span class="property-name"><code>speaker</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
                           <span class="property-name"><code>translation</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
@@ -2466,6 +2434,13 @@ https://odysseia-greek.com/graphql
                         <td>
                         </td>
                       </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>speaker</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -2476,10 +2451,10 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"speaker"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"translation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"translation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"greek"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"place"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span>
+  <span class="hljs-attr">"place"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"speaker"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -2555,7 +2530,7 @@ https://odysseia-greek.com/graphql
   <span class="hljs-attr">"dialogue"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Dialogue</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"quizMetadata"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">QuizMetadata</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"quizType"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"set"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"set"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"theme"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
@@ -2605,7 +2580,7 @@ https://odysseia-greek.com/graphql
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"books"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">ESBook</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"key"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+  <span class="hljs-attr">"key"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -2769,7 +2744,7 @@ https://odysseia-greek.com/graphql
                   <h5>Example</h5>
                   <html>
                     <head></head>
-                    <body><pre><code class="hljs language-json"><span class="hljs-number">987.65</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-number">123.45</span>
 </code></pre>
                     </body>
                   </html>
@@ -2823,7 +2798,7 @@ https://odysseia-greek.com/graphql
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"database"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Database</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"healthy"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"healthy"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"time"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
@@ -2893,7 +2868,7 @@ https://odysseia-greek.com/graphql
   <span class="hljs-attr">"dutch"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"english"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"greek"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"linkedWord"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"linkedWord"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"original"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
@@ -3028,7 +3003,7 @@ https://odysseia-greek.com/graphql
                   <h5>Example</h5>
                   <html>
                     <head></head>
-                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"averageAccuracy"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123.45</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"timesCorrect"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"timesIncorrect"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">}</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"averageAccuracy"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123.45</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"timesCorrect"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"timesIncorrect"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
                   </html>
@@ -3219,7 +3194,7 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"key"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"key"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"sections"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Section</span><span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
@@ -3283,7 +3258,7 @@ https://odysseia-greek.com/graphql
   <span class="hljs-attr">"rootWord"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"rule"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"translation"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"abc123"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"word"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+  <span class="hljs-attr">"word"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -3388,6 +3363,52 @@ https://odysseia-greek.com/graphql
               </div>
             </div>
           </section>
+          <section id="definition-Segments" class="definition definition-object" data-traverse-target="definition-Segments">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">Segments</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>maxSet</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>name</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"maxSet"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
           <section id="definition-Speaker" class="definition definition-object" data-traverse-target="definition-Speaker">
             <div class="definition-group-name">
               <a href="#group-Types">Types</a>
@@ -3433,7 +3454,7 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"shorthand"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"translation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
 <span class="hljs-punctuation">}</span>
@@ -3508,7 +3529,7 @@ https://odysseia-greek.com/graphql
   <span class="hljs-attr">"alexandros"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Health</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"dionysios"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Health</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"herodotos"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Health</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"overallHealth"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"overallHealth"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"sokrates"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Health</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
@@ -3606,12 +3627,61 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"author"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"author"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"book"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"perseusTextLink"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"perseusTextLink"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"reference"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"rhemai"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Rhema</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+  <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-Themes" class="definition definition-object" data-traverse-target="definition-Themes">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">Themes</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>name</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>segments</code></span> - <span class="property-type"><a href="#definition-Segments"><code>[Segments]</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"segments"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Segments</span><span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -3710,7 +3780,7 @@ https://odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"provided"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"provided"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"source"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>

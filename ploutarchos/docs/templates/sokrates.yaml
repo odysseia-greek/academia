@@ -26,13 +26,13 @@ info:
     url: https://opensource.org/licenses/MIT
   version: 0.2.4
 servers:
-- url: http://k3s-odysseia.greek/sokrates/v1
-- url: https://k3s-odysseia.greek/sokrates/v1
+  - url: http://k3s-odysseia.greek/sokrates/v1
+  - url: https://k3s-odysseia.greek/sokrates/v1
 paths:
   /answer:
     post:
       tags:
-      - questions
+        - questions
       description: Checks the whether the provided answer is right or wrong
       operationId: answer
       requestBody:
@@ -96,15 +96,15 @@ paths:
             application/json:
               schema:
                 oneOf:
+                  - $ref: '#/components/schemas/AuthorBasedQuizResponse'
                   - $ref: '#/components/schemas/QuizResponse'
                   - $ref: '#/components/schemas/DialogueQuizResponse'
-                  - $ref: '#/components/schemas/AuthorBasedQuizResponse'
                 discriminator:
                   propertyName: responseType
                   mapping:
-                    createQuiz: '#/components/schemas/QuizResponse'
-                    dialogueQuiz: '#/components/schemas/DialogueQuizResponse'
                     authorBasedQuiz: '#/components/schemas/AuthorBasedQuizResponse'
+                    multichoice: '#/components/schemas/QuizResponse'
+                    dialogueQuiz: '#/components/schemas/DialogueQuizResponse'
         '400':
           description: ValidationError
           content:
@@ -126,7 +126,7 @@ paths:
   /health:
     get:
       tags:
-      - status
+        - status
       description: Checks if api is healthy
       operationId: health
       responses:
@@ -145,7 +145,7 @@ paths:
   /options:
     get:
       tags:
-      - options
+        - options
       description: Finds all themes available
       operationId: options
       parameters:
@@ -246,48 +246,71 @@ components:
             example: "ἀρχή"
       required:
         - quizType
-    QuizResponse:
-      type: object
-      properties:
-        quizItem:
-          type: string
-          example: ὁ λόγος
-        numberOfItems:
-          type: integer
-          example: 20
-        options:
-          type: array
-          items:
-            $ref: '#/components/schemas/Options'
-    Options:
-      type: object
-      properties:
-        audioUrl:
-          type: string
-          example: agora.wav
-        imageUrl:
-          type: string
-          example: agora.webp
-        quizWord:
-          type: string
-          example: word
-      required:
-        - quizWord
 
     AuthorBasedQuizResponse:
       type: object
       properties:
         fullSentence:
           type: string
-          example: ΕΝ ΑΡΧΗ ἦν ὁ λόγος, καὶ ὁ λόγος ἦν πρὸς τὸν θεόν, καὶ θεὸς ἦν ὁ λόγος
+          example: "Ἡροδότου Ἁλικαρνησσέος ἱστορίης ἀπόδεξις ἥδε, ..."
         translation:
           type: string
-          example: In the beginning was the Word, and the Word was with God, and the Word was God.
+          example: "This is the display of the inquiry of Herodotus of Halicarnassus..."
         reference:
           type: string
-          example: /texts?author=John&book=New+Testament&reference=1
+          example: "/texts?author=Herodotos&book=Histories&reference=1.1"
         quiz:
           $ref: '#/components/schemas/QuizResponse'
+        grammarQuiz:
+          type: array
+          items:
+            $ref: '#/components/schemas/GrammarQuizAdded'
+
+    QuizResponse:
+      type: object
+      properties:
+        quizItem:
+          type: string
+          example: "Ἡρόδοτος"
+        numberOfItems:
+          type: integer
+          example: 30
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/Options'
+
+    Options:
+      type: object
+      properties:
+        quizWord:
+          type: string
+          example: "Herodotus"
+        audioUrl:
+          type: string
+          example: "agora.wav"
+        imageUrl:
+          type: string
+          example: "agora.webp"
+      required:
+        - quizWord
+
+    GrammarQuizAdded:
+      type: object
+      properties:
+        correctAnswer:
+          type: string
+          example: "Genitive Singular"
+        wordInText:
+          type: string
+          example: "Ἡροδότου"
+        extraInformation:
+          type: string
+          example: ""
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/Options'
 
     DialogueQuizResponse:
       type: object
@@ -296,13 +319,19 @@ components:
           $ref: '#/components/schemas/QuizMetadata'
         theme:
           type: string
-          example: Euripides - Medea
+          example: "Euripides - Medea"
         quizType:
           type: string
-          example: dialogue
+          example: "dialogue"
         set:
           type: integer
           example: 1
+        segment:
+          type: string
+          example: "Social"
+        reference:
+          type: string
+          example: "/texts?author=Plato&book=Republic&reference=1.1"
         dialogue:
           $ref: '#/components/schemas/Dialogue'
         content:
@@ -322,66 +351,57 @@ components:
       properties:
         language:
           type: string
-          example: English
+          example: "English"
       required:
         - language
-
-    DialogueContent:
-      type: object
-      properties:
-        translation:
-          type: string
-          example: What, wilt thou banish me, and to my prayers no pity yield?
-        greek:
-          type: string
-          example: ἀλλ’ ἐξελᾷς με κοὐδὲν αἰδέσῃ λιτάς;
-        place:
-          type: integer
-          example: 4
-        speaker:
-          type: string
-          example: Μήδεια
-      required:
-        - translation
-        - greek
-        - place
-        - speaker
 
     Dialogue:
       type: object
       properties:
         introduction:
           type: string
-          example: Plato's "Euthyphro" is an early dialogue
+          example: "Plato's 'Euthyphro' is an early dialogue."
         speakers:
           type: array
           items:
             $ref: '#/components/schemas/Speaker'
         section:
           type: string
-          example: 3e-4b
+          example: "3e-4b"
         linkToPerseus:
           type: string
-          example: https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0059.tlg001.perseus-grc1:3-4?right=perseus-eng2
+          example: "https://scaife.perseus.org/reader/..."
       required:
         - introduction
         - speakers
         - section
         - linkToPerseus
 
+    DialogueContent:
+      type: object
+      properties:
+        translation:
+          type: string
+          example: "What, wilt thou banish me, and to my prayers no pity yield?"
+        greek:
+          type: string
+          example: "ἀλλ’ ἐξελᾷς με κοὐδὲν αἰδέσῃ λιτάς;"
+        place:
+          type: integer
+          example: 2
+
     Speaker:
       type: object
       properties:
         name:
           type: string
-          example: ΣΩΚΡΑΤΗΣ
+          example: "ΣΩΚΡΑΤΗΣ"
         shorthand:
           type: string
-          example: ΣΩ
+          example: "ΣΩ"
         translation:
           type: string
-          example: Socrates
-
+          example: "Socrates"
 
     AnswerRequest:
       type: object
@@ -574,6 +594,7 @@ components:
               example: 6
           required:
             - correctPlace
+
     Health:
       type: object
       properties:
@@ -590,6 +611,7 @@ components:
           example: 2023-06-07 15:02:11.678766777 +0000 UTC m=+5090.268683461
           x-go-name: Time
       x-go-package: github.com/odysseia-greek/agora/plato/models
+
     DatabaseHealth:
       type: object
       properties:
@@ -610,6 +632,7 @@ components:
           example: 8.8.0
           x-go-name: ServerVersion
       x-go-package: github.com/odysseia-greek/agora/plato/models
+
     Memory:
       type: object
       properties:
@@ -641,9 +664,10 @@ components:
           type: string
           x-go-name: ElasticError
       x-go-package: github.com/odysseia-greek/agora/plato/models
+
     ElasticSearchError:
       required:
-      - uniqueCode
+        - uniqueCode
       type: object
       properties:
         errorModel:
@@ -653,9 +677,10 @@ components:
           example: 94374b4f-3dda-4ffb-b33b-2cb6ba092b84
           x-go-name: UniqueCode
       x-go-package: github.com/odysseia-greek/agora/plato/models
+
     ErrorModel:
       required:
-      - uniqueCode
+        - uniqueCode
       type: object
       properties:
         uniqueCode:
@@ -663,6 +688,7 @@ components:
           example: 94374b4f-3dda-4ffb-b33b-2cb6ba092b84
           x-go-name: UniqueCode
       x-go-package: github.com/odysseia-greek/agora/plato/models
+
     MethodError:
       required:
         - uniqueCode
@@ -678,6 +704,7 @@ components:
           example: 94374b4f-3dda-4ffb-b33b-2cb6ba092b84
           x-go-name: UniqueCode
       x-go-package: github.com/odysseia-greek/agora/plato/models
+
     MethodMessages:
       type: object
       properties:
@@ -691,6 +718,7 @@ components:
           x-go-name: Message
       description: MethodMessages messages used in method error
       x-go-package: github.com/odysseia-greek/agora/plato/models
+
     ValidationError:
       required:
         - uniqueCode
@@ -706,6 +734,7 @@ components:
           example: 94374b4f-3dda-4ffb-b33b-2cb6ba092b84
           x-go-name: UniqueCode
       x-go-package: github.com/odysseia-greek/agora/plato/models
+
     ValidationMessages:
       type: object
       properties:
